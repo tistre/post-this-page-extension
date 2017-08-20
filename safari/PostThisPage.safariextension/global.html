@@ -10,22 +10,19 @@
 
 function commandHandler(e)
 {
-    if (e.command === 'post_this_page')
-    {
+    if (e.command === 'post_this_page') {
         requestPageData(e);
-console.log(e);
     }
 }
 
+
 function messageHandler(e)
 {
-    if (e.name !== 'get_page_data_result')
-    {
-        return;
+    if (e.name === 'get_page_data_result') {
+        postThisPage(e);
     }
-console.log(e);
-    postThisPage(e);
 }
+
 
 function requestPageData(e)
 {
