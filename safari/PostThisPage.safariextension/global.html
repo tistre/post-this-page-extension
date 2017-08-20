@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+<title>Post This Page</title>
+<script type="text/javascript">
+
+// Similar to: http://louisrli.github.io/blog/2013/01/16/javascript-canvas-screenshot/
+
+
+function commandHandler(e)
+{
+    if (e.command === 'post_this_page')
+    {
+        requestPageData(e);
+console.log(e);
+    }
+}
+
+function messageHandler(e)
+{
+    if (e.name !== 'get_page_data_result')
+    {
+        return;
+    }
+console.log(e);
+    postThisPage(e);
+}
+
+function requestPageData(e)
+{
+    var activeTab, msgData;
+    
+    activeTab = e.target.browserWindow.activeTab;
+    
+    msgData =
+    {
+        formAction: safari.extension.settings.post_to_url,
+        formData:
+        {
+            url: activeTab.url,
+            title: activeTab.title,
+            screenshot: ''
+        }
+    };
+    
+    activeTab.visibleContentsAsDataURL(function(data_url) 
+    {
+        msgData.formData.screenshot = data_url;
+    
+        activeTab.page.dispatchMessage('get_page_data', msgData);
+    });
+}
+
+function postThisPage(e)
+{
+    var newTab = e.target.browserWindow.openTab();
+    newTab.url = safari.extension.baseURI + 'form.html';
+    
+    newTab.addEventListener
+    (
+        'navigate', 
+        function() 
+        { 
+            newTab.page.dispatchMessage('post_this_page', e.message);
+        }, 
+        false
+    );
+}
+
+safari.application.addEventListener('command', commandHandler, false);
+
+safari.application.activeBrowserWindow.addEventListener('message', messageHandler, false);
+
+</script>
+</head>
+<body></body>
+</html>

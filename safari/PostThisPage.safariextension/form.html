@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+<title>Post This Page</title>
+</head>
+<body>
+
+<img src="" id="screenshotImg" />
+
+<form method="POST" action="">
+
+<input type="text" name="url" value="" />
+<input type="text" name="title" value="" />
+<input type="hidden" name="html" value="" />
+<input type="hidden" name="screenshot" id="screenshotInput" value="" />
+<input type="submit" />
+      
+</form>
+
+<canvas id="screenshotCanvas"></canvas>
+
+<script src="jquery.min.js"></script>
+  
+<script type="text/javascript">
+
+$(function() 
+{
+    function messageHandler(e) 
+    {
+        var form, key;
+    
+        if (e.name !== 'post_this_page')
+        {
+            return;
+        }
+    
+        form = document.forms[ 0 ];
+    
+        form.action = e.message.formAction;
+    
+        for (key in e.message.formData)
+        {
+            if (key === 'screenshot')
+            {
+                continue;
+            }
+            else
+            {
+                form.elements[ key ].value = e.message.formData[ key ];
+            }
+        }
+
+        $('#screenshotImg').attr('src', e.message.formData.screenshot).on('load', function() 
+        {
+            var $canvas = $('#screenshotCanvas');
+            var canvas = $canvas[ 0 ];
+            var $img = $('#screenshotImg');
+            var img = $img[ 0 ];
+
+            canvas.width = $img.width();
+            canvas.height = $img.height();
+            canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+            
+            $('#screenshotInput').val(canvas.toDataURL('image/jpeg', 0.5));
+
+            form.submit();
+        });             
+    }
+
+    safari.self.addEventListener('message', messageHandler, false);
+});
+
+</script>
+</body>
+</html>

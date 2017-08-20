@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Author</key>
+	<string>Tim Strehle</string>
+	<key>Builder Version</key>
+	<string>12603.3.8</string>
+	<key>CFBundleDisplayName</key>
+	<string>Post This Page</string>
+	<key>CFBundleIdentifier</key>
+	<string>de.strehle.postthispage</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleShortVersionString</key>
+	<string>0.1</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>Chrome</key>
+	<dict>
+		<key>Database Quota</key>
+		<real>1048576</real>
+		<key>Global Page</key>
+		<string>global.html</string>
+		<key>Toolbar Items</key>
+		<array>
+			<dict>
+				<key>Command</key>
+				<string>post_this_page</string>
+				<key>Identifier</key>
+				<string>btn_post_this_page</string>
+				<key>Image</key>
+				<string>white_noise.png</string>
+				<key>Label</key>
+				<string>Post</string>
+				<key>Palette Label</key>
+				<string>Post This Page</string>
+			</dict>
+		</array>
+	</dict>
+	<key>Content</key>
+	<dict>
+		<key>Scripts</key>
+		<dict>
+			<key>End</key>
+			<array>
+				<string>inject.js</string>
+			</array>
+		</dict>
+	</dict>
+	<key>Description</key>
+	<string>Send the current page screenshot and HTML to a URL of your choice</string>
+	<key>DeveloperIdentifier</key>
+	<string>0000000000</string>
+	<key>ExtensionInfoDictionaryVersion</key>
+	<string>1.0</string>
+	<key>Permissions</key>
+	<dict>
+		<key>Website Access</key>
+		<dict>
+			<key>Include Secure Pages</key>
+			<true/>
+			<key>Level</key>
+			<string>All</string>
+		</dict>
+	</dict>
+	<key>Website</key>
+	<string>http://www.strehle.de/post_this_page</string>
+</dict>
+</plist>
