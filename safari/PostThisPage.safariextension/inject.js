@@ -1,7 +1,6 @@
 function messageHandler(e)
 {
-    if (e.name !== 'get_page_data')
-    {
+    if (e.name !== 'get_page_data') {
         return;
     }
     
@@ -11,7 +10,7 @@ function messageHandler(e)
 }
 
 
-if (window.top === window) // Ignore iFrames
-{
+// Ignore iFrames
+if (window.top === window) {
     safari.self.addEventListener('message', messageHandler, false);
 }
